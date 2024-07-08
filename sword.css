@@ -1,0 +1,77 @@
+@font-face {
+    font-family: Inter;
+    src: url("https://your-font-file-host/inter.css");
+}
+
+body {
+    font-family: 'Inter var', sans-serif;
+    text-align: center;
+    background-color: #131313;
+}
+
+/* Header? */
+hr {
+    width: 500px;
+}
+
+/* Accesses the ID title by using #<id> */
+#title {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#board {
+    width: 350px;
+    height: 420px;
+    margin: 0 auto;
+    margin-top: 3px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#answer {
+    font-family: 'Inter var', sans-serif;
+    color: white;
+}
+
+/* Classes are accessed via . notation */
+.tile {
+    /* One char box */
+    border: 2px solid #1C1C1C;
+    width: 60px;
+    height: 60px;
+    margin: 2.5px;
+
+    /* Text */
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Inter var', sans-serif;
+    display: flex;
+    /* Justify is x axis, align is y axis */
+    justify-content: center;
+    align-items: center;
+}
+
+.correctLetter {
+    font-family: 'Inter var', sans-serif;
+    background-color: #6AAA64;
+    color: white;
+    border-color: #1C1C1C;
+}
+
+.presentInWord {
+    font-family: 'Inter var', sans-serif;
+    background-color: #C9B458;
+    color: white;
+    border-color: #1C1C1C;
+}
+
+.absentFromWord {
+    font-family: 'Inter var', sans-serif;
+    background-color: #787C7E;
+    color: white;
+    border-color: #1C1C1C;
+}
