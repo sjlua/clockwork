@@ -1,2 +1,2 @@
-# sWord
-sWord, a Wordle (NYC Times) Parody
+# SWORD
+SWORD, a parody of NY Times' Wordle
