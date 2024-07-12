@@ -49,7 +49,7 @@ window.onload = function() {
 function initialise() {
     // Create game
     // x = Current attempt, y = Location of letter within word
-    alert(word)
+    
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
             /* instead of needing to manually create all the tile elements,
