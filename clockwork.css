@@ -11,7 +11,7 @@ body {
 
 /* Line divider length */
 hr {
-    width: 500px;
+    width: 50vw;
 }
 
 p {
@@ -55,9 +55,6 @@ p {
     flex-wrap: wrap;
 }
 
-#answer {
-    color: white;
-}
 
 /* Classes are accessed via . notation */
 .tile {
@@ -79,19 +76,19 @@ p {
 }
 
 .correctLetter {
-    background-color: #6AAA64;
+    background-color: #447d3f;
     color: white;
     border-color: #1C1C1C;
 }
 
 .presentInWord {
-    background-color: #a69239;
+    background-color: #b1982c;
     color: white;
     border-color: #1C1C1C;
 }
 
 .absentFromWord {
-    background-color: #3c2222;
+    background-color: #582727;
     color: white;
     border-color: #1C1C1C;
 }
@@ -103,6 +100,7 @@ p {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .key-tile {
@@ -126,5 +124,7 @@ p {
     margin: 1px;
     color: white;
     justify-content: center;
+    align-items: center;
     border: 1px solid #1C1C1C;
+    display: flex;
 }

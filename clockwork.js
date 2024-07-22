@@ -1,5 +1,4 @@
-// Layout variables
-
+// Game board layout variables
 var height = 6; // Length of how many attempts
 var width = 5; // Length of each attempt
 
@@ -10,19 +9,21 @@ var column = 0; // y axis
 // Game function variables
 var gameOver = false;
 
-// var word = "";
+// Defining the eligible guesses and words for a game
 import { eligibleWords, eligibleGuesses } from "./clockworkWordBank.js";
 var word = eligibleWords[Math.floor(Math.random() * eligibleWords.length)].toUpperCase();
-
-var totalWins = 0;
 
 // Countdown variables
 const countdownEl = document.getElementById("countdown");
 
+// Total game time
 const startingMinutes = 3;
 let gameTime = startingMinutes * 60;
 
-setInterval(countdown, 1000); // Every second the countdown function is run
+// Every second the countdown function is run
+setInterval(countdown, 1000);
+
+// Handles the updating of the countdown clock
 function countdown() {
     const minutes = Math.floor(gameTime / 60);
 
@@ -32,10 +33,19 @@ function countdown() {
     gameTime--;
     gameTime = gameTime < 0 ? 0 : gameTime; // Prevents negative time
 
-    countdownEl.innerHTML = `${minutes}:${seconds}`
+    
+    // Replace the timer with the word if the game is complete
+    if (gameOver == true) {
+        countdownEl.innerHTML = "The word is " + word
+    }
+    else {
+        countdownEl.innerHTML = `${minutes}:${seconds}`
+    }
+    
+    // If the timer ends, the game is finished
     if (countdownEl.innerHTML == "0:00") {
+        alert("Time's up! You have failed, the word was " + word);
         gameOver = true;
-        alert("Time's up! You have won " + totalWins + " games.")
     }
 }
 
@@ -56,7 +66,7 @@ function initialise() {
             we use the following to create them.
             If you wanted to manually define them in HTML, it would look like
             <span id="xcoord-ycoord" class="tile">Letter here<span>
-            x 30 as there are 30 individual tiles
+            x30 as there are 30 individual tiles (6*5)
             */
             let tile = document.createElement("span");
             tile.id = x.toString() + "-" + y.toString();
@@ -69,7 +79,7 @@ function initialise() {
     // Create the key board
     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-        ["A", "S", "D", "F", "G", "H", "J", "K", "L", " "],
+        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
         ["Enter", "Z", "X", "C", "V", "B", "N", "M", "⌫" ]
     ]
 
@@ -148,7 +158,6 @@ function processInput(e) {
     // If all attempts have been used up
     if (gameOver == false && row == height) {
         gameOver = true;
-        document.getElementById("answer").innerText = word;
     }
 }
 
@@ -156,8 +165,6 @@ function processInput(e) {
 function update() {
     let guess = ""
     document.getElementById("answer").innerText = "";
-
-    // Validates the user input to ensure only actual words are entered.
 
     //string up the guesses into the word
     for (let currentColumn = 0; currentColumn < width; currentColumn++) {
@@ -188,8 +195,9 @@ function update() {
         }
     }
 
-    // first run through to eliminate duplicated coutning
+    // first run through to eliminate duplicated counting
     for (let currentColumn = 0; currentColumn < width; currentColumn++) {
+        // The gameboard tile
         let currentTile = document.getElementById(row.toString() + "-" + currentColumn.toString());
         let letter = currentTile.innerText;
         
@@ -199,7 +207,7 @@ function update() {
 
             // New keyboard logic
             let keyTile = document.getElementById("Key" + letter);
-            keyTile.classList.remove("presentInWord");
+            keyTile.classList.remove("absentFromWord", "presentInWord");
             keyTile.classList.add("correctLetter");
 
             correct += 1;
@@ -209,7 +217,6 @@ function update() {
         // Win detection
         if (correct == width) {
             gameOver = true;
-            totalWins += 1;
         }
     }
 
@@ -217,15 +224,16 @@ function update() {
         let currentTile = document.getElementById(row.toString() + "-" + currentColumn.toString());
         let letter = currentTile.innerText;
         
-        // check if the letter that isn't in the right place, exists at all
+        // The following runs only if the letter hasn't been marked as correct to avoid overriding
         if (!currentTile.classList.contains("correctLetter")) {
             // Is letter in the word?
             if (word.includes(letter) && letterCount[letter] > 0) {
                 currentTile.classList.add("presentInWord");
 
-                // New keyboard logic
+                // Update keyboard to make present letters yellow
                 let keyTile = document.getElementById("Key" + letter);
                 if (!keyTile.classList.contains("correctLetter")) {
+                    keyTile.classList.remove("absentFromWord");
                     keyTile.classList.add("presentInWord");
                 }
 
@@ -233,8 +241,12 @@ function update() {
             } // If not in word, add attribute absentFromWord
             else {
                 currentTile.classList.add("absentFromWord");
+
+                // Ensure the keyboard is only updated when the letter isn't in the word at all
                 let keyTile = document.getElementById("Key" + letter);
-                keyTile.classList.add("absentFromWord")
+                if (!keyTile.classList.contains("correctLetter") && !keyTile.classList.contains("presentInWord")) {
+                    keyTile.classList.add("absentFromWord");
+                }
             }
         }
     }
@@ -243,19 +255,3 @@ function update() {
     column = 0 // Reset position to original column
     
 }
-
-// function newGame() {
-//     totalWins += 1
-//     gameOver = false
-    
-//     for (let x = 0; x < height; x++) {
-//         for (let y = 0; y < width; y++) {
-//             let tile = document.getElementById(x.toString() + "-" + y.toString());
-//             tile.innerText = ""; // The letter displayed    
-//             document.getElementById("board").removeChild(tile);
-//         }
-//     }
-
-//     initialise();
-//     alert(totalWins);
-// }
