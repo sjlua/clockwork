@@ -143,7 +143,7 @@ function processInput(e) {
             }
         }
     }
-    else if (e.code == "Backspace") {
+    else if (e.code == "Backspace" || e.code == "Delete") {
         // Ensures characters can only be deleted if there is at least one character entered
         if (0 < column && column <= width) {
             column -= 1;
