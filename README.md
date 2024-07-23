@@ -5,7 +5,11 @@
 * Guess a 5 letter word.
 * Repeat 6 times, or until the time runs out!
 
-### Changelog
+### Changelog - V1.1
+* Added the 'Delete' key as alternative option for deleting characters due to browser behaviour.
+* Added a temporary fix to try prevent the backspace browser behaviour.
+
+###### V1
 * Version 1 of CLOCKWORK released.
 * Fixed game logic to account for multiple letters.
 * Fixed incorrect keyboard styling from game logic.

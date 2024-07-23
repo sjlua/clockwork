@@ -144,6 +144,8 @@ function processInput(e) {
         }
     }
     else if (e.code == "Backspace" || e.code == "Delete") {
+        // Potential fix to prevent the Backspace key going back a page
+        e.preventDefault();
         // Ensures characters can only be deleted if there is at least one character entered
         if (0 < column && column <= width) {
             column -= 1;
