@@ -1,11 +1,15 @@
 # *CLOCKWORK*
-*CLOCKWORK* is a parody of the NY Times' Wordle, which adds a key twist - time. Now, users are forced to complete all 6 of their guesses within a 3 minutes, approximately 30 seconds per guess.
+*CLOCKWORK* is a parody of the NY Times' Wordle, which adds a key twist - time. Now, users are forced to complete all 6 of their guesses within a 3 minutes, roughly 30 seconds per guess!
 
 ### How to play
-* Guess a 5 letter word.
-* Repeat 6 times, or until the time runs out!
+1. Guess a 5 letter word.
+2. Repeat 5 more times, or until your 3 minutes run out!
 
-### Changelog - V1.1
+### Changelog - V1.2
+* Reverted the temporary fix to prevent backspace browser behaviour, as it broke the virtual keyboard back button. 
+* The Delete key is still a valid method to delete characters, as well as the virtual ⌫ key.
+
+###### V1.1
 * Added the 'Delete' key as alternative option for deleting characters due to browser behaviour.
 * Added a temporary fix to try prevent the backspace browser behaviour.
 

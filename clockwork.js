@@ -76,13 +76,14 @@ function initialise() {
         }
     }
 
-    // Create the key board
+    // Handles the creation of the virtual keyboard
     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
         ["Enter", "Z", "X", "C", "V", "B", "N", "M", "⌫" ]
     ]
 
+    // Creating the individual keys
     for (let i = 0; i < keyboard.length; i++) {
         let currRow = keyboard[i];
         let keyboardRow = document.createElement("div");
@@ -93,6 +94,7 @@ function initialise() {
 
             let key = currRow[j];
             keyTile.innerText = key;
+
             if (key == "Enter") {
                 keyTile.id = "Enter";
             }
@@ -102,9 +104,10 @@ function initialise() {
             else if ("A" <= key && key <= "Z") {
                 keyTile.id = "Key" + key; // "Key" + "A";
             } 
- 
+            
             keyTile.addEventListener("click", processKey);
-
+            
+            // Handles customisation of the key itself
             if (key == "Enter") {
                 keyTile.classList.add("enter-key-tile");
             } else {
@@ -117,11 +120,11 @@ function initialise() {
         document.body.appendChild(keyboardRow);
     }
     
-
     // Listen for Key Press
     document.addEventListener("keyup", (e) => {
         processInput(e);
     })
+
 }
 
 function processKey() {
@@ -130,7 +133,7 @@ function processKey() {
 }
 
 function processInput(e) {
-    if (gameOver == true) return; 
+    if (gameOver) return; 
     // The next line of code returns the key that was pressed by the user
     // alert(e.code)
 
@@ -144,12 +147,12 @@ function processInput(e) {
         }
     }
     else if (e.code == "Backspace" || e.code == "Delete") {
-        // Potential fix to prevent the Backspace key going back a page
-        e.preventDefault();
         // Ensures characters can only be deleted if there is at least one character entered
         if (0 < column && column <= width) {
             column -= 1;
         }
+
+        // Sets the inner displayed text to nothing
         let currentTile = document.getElementById(row.toString() + "-" + column.toString());
         currentTile.innerText = "";
     }
@@ -158,7 +161,7 @@ function processInput(e) {
     }
 
     // If all attempts have been used up
-    if (gameOver == false && row == height) {
+    if (!gameOver && row == height) {
         gameOver = true;
     }
 }
